@@ -1,0 +1,11 @@
+bin
+.vscode
+.DS_Store
+
+format.sh
+FrontyBrowser
+
+libs
+resources
+
+ideas.txt
