@@ -21,7 +21,7 @@
 #ifndef FTY_RENDERER_CONTEXT_H
 #define FTY_RENDERER_CONTEXT_H
 
-#include "core/renderer/types.h"
+#include "core/types.h"
 
 __FRONTY_NS_START(Fronty)
 

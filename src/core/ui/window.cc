@@ -46,7 +46,7 @@ void Window::closeWindow() noexcept
 {
 }
 
-void Window::attachRenderer(const void*) noexcept
+void Window::attachRenderer(const Types::ContextType&&) noexcept
 {
 }
 

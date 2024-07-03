@@ -24,7 +24,7 @@
 #define __FRONTY_C_TYPES
 
 #include "core/decls.h"
-#include "core/renderer/types.h"
+#include "core/types.h"
 
 #include <string>
 
