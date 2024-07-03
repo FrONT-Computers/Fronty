@@ -18,28 +18,37 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef FTY_DECLS
-#define FTY_DECLS
+#ifndef FTY_RENDERER_TYPES_H
+#define FTY_RENDERER_TYPES_H
 
-#ifdef __FRONTY_C_TYPES
-#include <stdint.h>
-#endif
+#include "core/decls.h"
 
-// no value no pointer
-#define __FRONTY_IMMUTABLE_OBJ(obj) const obj const
+__FRONTY_NS_START(Fronty)
+__FRONTY_NS_START(Types)
 
-#if __cplusplus
-#define __FRONTY_DECLS_START extern "C" {
-#define __FRONTY_DECLS_END }
-#define __FRONTY_NS_START(name) \
-    namespace name              \
-    {
-#define __FRONTY_NS_END() }
-#else
-#define __FRONTY_DECLS_START
-#define __FRONTY_DECLS_END
-#define __FRONTY_NS_START(unused)
-#define __FRONTY_NS_END()
-#endif
+enum class ContextType
+{
+    CONTEXT_OPENGL,
+    CONTEXT_DIRECTX,
+    CONTEXT_METAL,
+    CONTEXT_OPENGLES
+};
 
-#endif /* FTY_DECLS */
+enum class WindowStateFlags
+{
+    FLAG_WINDOW_DEFAULT_PAGE = 0x1,
+    FLAG_WINDOW_RESTORE_PAGE = 0x2,
+
+    FLAG_WINDOW_FULLSCREEN = 0x4,
+    FLAG_WINDOW_MODAL_VIEW = 0x8,
+
+    FLAG_WINDOW_ANTI_ALIAS = 0x10,
+    FLAG_WINDOW_VSYNC      = 0x20,
+
+    // FLAG_WINDOW_FULLSCREEN = 0x40
+};
+
+__FRONTY_NS_END()
+__FRONTY_NS_END()
+
+#endif /* FTY_RENDERER_TYPES_H */

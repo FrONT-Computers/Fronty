@@ -24,7 +24,7 @@ OBJS = $(C_OBJS) $(CXX_OBJS)
 TARGET = $(BIN_DIR)/FrontyBrowser
 
 # Default rule
-all: $(TARGET)
+all: $(TARGET) clean_objs
 
 # Link rule
 $(TARGET): $(OBJS) | $(BIN_DIR)
@@ -42,6 +42,10 @@ $(BIN_DIR):
 %.o: %.cc
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
+# Rule to clean object files after linking
+clean_objs:
+	rm -f $(OBJS)
+
 # Clean rule
 clean:
 	rm -f $(OBJS)
@@ -52,7 +56,7 @@ clean_build: clean all
 
 # Run rule
 run: $(TARGET)
-	rm ./src/main.o
+	rm -f $(OBJS)
 	./$(TARGET)
 
-.PHONY: all clean clean_build run
+.PHONY: all clean clean_build run clean_objs

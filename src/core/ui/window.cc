@@ -18,28 +18,45 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef FTY_DECLS
-#define FTY_DECLS
+#include "core/ui/window.h"
+#include <GLFW/glfw3.h>
 
-#ifdef __FRONTY_C_TYPES
-#include <stdint.h>
-#endif
+__FRONTY_NS_START(Fronty)
+__FRONTY_NS_START(Gui)
 
-// no value no pointer
-#define __FRONTY_IMMUTABLE_OBJ(obj) const obj const
+bool Window::s_IsWindowOpen;
 
-#if __cplusplus
-#define __FRONTY_DECLS_START extern "C" {
-#define __FRONTY_DECLS_END }
-#define __FRONTY_NS_START(name) \
-    namespace name              \
-    {
-#define __FRONTY_NS_END() }
-#else
-#define __FRONTY_DECLS_START
-#define __FRONTY_DECLS_END
-#define __FRONTY_NS_START(unused)
-#define __FRONTY_NS_END()
-#endif
+Window::Window(const uint32_t& width, const uint32_t& height, const std::string& title)
+    : m_Width(width)
+    , m_Height(height)
+    , m_Title(title)
+{
+}
 
-#endif /* FTY_DECLS */
+Window::~Window()
+{
+    glfwTerminate();
+}
+
+bool Window::initWindow() noexcept
+{
+}
+
+void Window::closeWindow() noexcept
+{
+}
+
+void Window::attachRenderer(const void*) noexcept
+{
+}
+
+void Window::attachMemoryLog(const void*) noexcept
+{
+}
+
+void Window::attachWindowFlags(const Types::WindowStateFlags&) noexcept
+{
+}
+
+__FRONTY_NS_END()
+__FRONTY_NS_END()

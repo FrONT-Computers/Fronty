@@ -18,28 +18,28 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef FTY_DECLS
-#define FTY_DECLS
+#ifndef FTY_RENDERER_CONTEXT_H
+#define FTY_RENDERER_CONTEXT_H
 
-#ifdef __FRONTY_C_TYPES
-#include <stdint.h>
-#endif
+#include "core/renderer/types.h"
 
-// no value no pointer
-#define __FRONTY_IMMUTABLE_OBJ(obj) const obj const
+__FRONTY_NS_START(Fronty)
 
-#if __cplusplus
-#define __FRONTY_DECLS_START extern "C" {
-#define __FRONTY_DECLS_END }
-#define __FRONTY_NS_START(name) \
-    namespace name              \
-    {
-#define __FRONTY_NS_END() }
-#else
-#define __FRONTY_DECLS_START
-#define __FRONTY_DECLS_END
-#define __FRONTY_NS_START(unused)
-#define __FRONTY_NS_END()
-#endif
+class Context final
+{
+private:
+    static Types::ContextType s_ContextMode;
 
-#endif /* FTY_DECLS */
+public:
+    Context()  = delete;
+    ~Context() = delete;
+
+public:
+    /* Check if window is NOT open */
+    static void               setRendererContext(const Types::ContextType&&) noexcept;
+    static Types::ContextType getRendererContext() noexcept;
+};
+
+__FRONTY_NS_END()
+
+#endif /* FTY_RENDERER_CONTEXT_H */
