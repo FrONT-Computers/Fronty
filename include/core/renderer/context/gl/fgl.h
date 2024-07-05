@@ -18,39 +18,19 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef FTY_RENDERER_TYPES_H
-#define FTY_RENDERER_TYPES_H
-
-#define FRONTY_BUF_SIZE 256
+#ifndef FTY_RENDERER_CONTEXT_FGL_H
+#define FTY_RENDERER_CONTEXT_FGL_H
 
 #include "core/decls.h"
 
 __FRONTY_NS_START(Fronty)
-__FRONTY_NS_START(Types)
+__FRONTY_NS_START(Renderer)
 
-enum class ContextType
+class FrontyOpenGLContext final
 {
-    CONTEXT_OPENGL,
-    CONTEXT_DIRECTX,
-    CONTEXT_METAL,
-    CONTEXT_OPENGLES
-};
-
-enum class WindowStateFlags
-{
-    FLAG_WINDOW_DEFAULT_PAGE = 0x1,
-    FLAG_WINDOW_RESTORE_PAGE = 0x2,
-
-    FLAG_WINDOW_FULLSCREEN = 0x4,
-    FLAG_WINDOW_MODAL_VIEW = 0x8,
-
-    FLAG_WINDOW_ANTI_ALIAS = 0x10,
-    FLAG_WINDOW_VSYNC      = 0x20,
-
-    // FLAG_WINDOW_FULLSCREEN = 0x40
 };
 
 __FRONTY_NS_END()
 __FRONTY_NS_END()
 
-#endif /* FTY_RENDERER_TYPES_H */
+#endif /* FTY_RENDERER_CONTEXT_FGL_H */

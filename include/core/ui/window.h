@@ -26,6 +26,8 @@
 #include "core/decls.h"
 #include "core/types.h"
 
+#include <GLFW/glfw3.h>
+
 #include <string>
 
 __FRONTY_NS_START(Fronty)
@@ -40,10 +42,10 @@ private:
     friend class Fronty::Context;
 
 private:
+    GLFWwindow* m_Window;
     uint32_t    m_Width, m_Height;
     int         monitor;
     std::string m_Title;
-    /* Add More Fields */
     /* Static Fields */
     static bool s_IsWindowOpen;
 
@@ -54,8 +56,14 @@ public:
 public:
     /* Add More Member Functions */
     bool initWindow() noexcept;
+    bool initWindowFromSharedObject(Window*) noexcept;
+    bool shouldClose() const noexcept;
     void closeWindow() noexcept;
 
+    __FRONTY_IMMUTABLE_OBJ(GLFWwindow*)
+    getCoreWindow() const noexcept;
+
+public:
     /* TODO: Needs to be a Render Context (OpenGL, Metal, DirectX, etc) */
     void attachRenderer(const Types::ContextType&&) noexcept;
     /* To Monitor Memory Consumption */

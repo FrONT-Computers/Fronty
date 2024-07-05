@@ -18,39 +18,29 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef FTY_RENDERER_TYPES_H
-#define FTY_RENDERER_TYPES_H
+#import "native/FTYCocoaWindow.h"
 
-#define FRONTY_BUF_SIZE 256
+@implementation FTYCocoaWindow
 
-#include "core/decls.h"
-
-__FRONTY_NS_START(Fronty)
-__FRONTY_NS_START(Types)
-
-enum class ContextType
+- (void) setTitleBarTransparent:(GLFWwindow*)window shouldHide:(BOOL)hide;
 {
-    CONTEXT_OPENGL,
-    CONTEXT_DIRECTX,
-    CONTEXT_METAL,
-    CONTEXT_OPENGLES
-};
+    NSWindow* currentWindow = glfwGetCocoaWindow(window);
+    
+    /* NSWindowStyleMaskFullSizeContentView */ 
 
-enum class WindowStateFlags
+    currentWindow.titlebarAppearsTransparent = hide;
+    currentWindow.styleMask =   NSWindowStyleMaskTitled | 
+                                NSWindowStyleMaskClosable | 
+                                NSWindowStyleMaskMiniaturizable | 
+                                NSWindowStyleMaskResizable;
+    currentWindow.contentView.wantsLayer = YES;
+
+    NSLog(@"Cocoa Window Configured");
+}
+
+void setTitleBarTransparent(GLFWwindow* window, bool hide)
 {
-    FLAG_WINDOW_DEFAULT_PAGE = 0x1,
-    FLAG_WINDOW_RESTORE_PAGE = 0x2,
+    return [[FTYCocoaWindow new] setTitleBarTransparent: window shouldHide: hide];
+}
 
-    FLAG_WINDOW_FULLSCREEN = 0x4,
-    FLAG_WINDOW_MODAL_VIEW = 0x8,
-
-    FLAG_WINDOW_ANTI_ALIAS = 0x10,
-    FLAG_WINDOW_VSYNC      = 0x20,
-
-    // FLAG_WINDOW_FULLSCREEN = 0x40
-};
-
-__FRONTY_NS_END()
-__FRONTY_NS_END()
-
-#endif /* FTY_RENDERER_TYPES_H */
+@end

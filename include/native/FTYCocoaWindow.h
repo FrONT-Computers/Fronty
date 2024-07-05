@@ -18,39 +18,22 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef FTY_RENDERER_TYPES_H
-#define FTY_RENDERER_TYPES_H
+#ifndef FTY_NATIVE_COCOCA_WINDOW_H
+#define FTY_NATIVE_COCOCA_WINDOW_H
 
-#define FRONTY_BUF_SIZE 256
+#define GLFW_EXPOSE_NATIVE_COCOA
 
-#include "core/decls.h"
+#import "FTYCocoaWindow-Interface.h"
 
-__FRONTY_NS_START(Fronty)
-__FRONTY_NS_START(Types)
+#include <GLFW/glfw3.h>
+#include <GLFW/glfw3native.h>
 
-enum class ContextType
-{
-    CONTEXT_OPENGL,
-    CONTEXT_DIRECTX,
-    CONTEXT_METAL,
-    CONTEXT_OPENGLES
-};
+#import <AppKit/AppKit.h>
 
-enum class WindowStateFlags
-{
-    FLAG_WINDOW_DEFAULT_PAGE = 0x1,
-    FLAG_WINDOW_RESTORE_PAGE = 0x2,
+@interface FTYCocoaWindow : NSObject
 
-    FLAG_WINDOW_FULLSCREEN = 0x4,
-    FLAG_WINDOW_MODAL_VIEW = 0x8,
+- (void) setTitleBarTransparent:(GLFWwindow*)window shouldHide:(BOOL)hide;
 
-    FLAG_WINDOW_ANTI_ALIAS = 0x10,
-    FLAG_WINDOW_VSYNC      = 0x20,
+@end
 
-    // FLAG_WINDOW_FULLSCREEN = 0x40
-};
-
-__FRONTY_NS_END()
-__FRONTY_NS_END()
-
-#endif /* FTY_RENDERER_TYPES_H */
+#endif /* FTY_NATIVE_COCOCA_WINDOW_H */ 

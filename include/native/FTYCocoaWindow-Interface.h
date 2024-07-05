@@ -18,39 +18,20 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef FTY_RENDERER_TYPES_H
-#define FTY_RENDERER_TYPES_H
+#ifndef FTY_COCOA_WINDOW_INTERFACE_H
+#define FTY_COCOA_WINDOW_INTERFACE_H
 
-#define FRONTY_BUF_SIZE 256
+struct GLFWwindow;
 
-#include "core/decls.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-__FRONTY_NS_START(Fronty)
-__FRONTY_NS_START(Types)
+void setTitleBarTransparent(GLFWwindow*, bool);
 
-enum class ContextType
-{
-    CONTEXT_OPENGL,
-    CONTEXT_DIRECTX,
-    CONTEXT_METAL,
-    CONTEXT_OPENGLES
-};
+#ifdef __cplusplus
+}
+#endif
 
-enum class WindowStateFlags
-{
-    FLAG_WINDOW_DEFAULT_PAGE = 0x1,
-    FLAG_WINDOW_RESTORE_PAGE = 0x2,
 
-    FLAG_WINDOW_FULLSCREEN = 0x4,
-    FLAG_WINDOW_MODAL_VIEW = 0x8,
-
-    FLAG_WINDOW_ANTI_ALIAS = 0x10,
-    FLAG_WINDOW_VSYNC      = 0x20,
-
-    // FLAG_WINDOW_FULLSCREEN = 0x40
-};
-
-__FRONTY_NS_END()
-__FRONTY_NS_END()
-
-#endif /* FTY_RENDERER_TYPES_H */
+#endif /* FTY_COCOA_WINDOW_INTERFACE_H */

@@ -1,8 +1,10 @@
 # Compiler and flags
 CC = gcc
 CXX = g++
+OBJCXX = g++  # Objective-C++ compiler
 CFLAGS = -Wall -Iinclude -std=gnu17
 CXXFLAGS = -Wall -Iinclude -std=c++17
+OBJCXXFLAGS = -Wall -Iinclude -std=c++17 -fobjc-arc  # Objective-C++ flags
 LDFLAGS = -framework OpenGL -framework IOKit -framework Cocoa
 LIBS = -L./libs/Mac -lGLEW -lglfw3
 
@@ -14,11 +16,13 @@ BIN_DIR = bin
 # Find all source files
 C_SOURCES = $(shell find $(SRC_DIRS) -name '*.c')
 CXX_SOURCES = $(shell find $(SRC_DIRS) -name '*.cc')
+OBJCXX_SOURCES = $(shell find $(SRC_DIRS) -name '*.mm')
 
 # Object files
 C_OBJS = $(C_SOURCES:.c=.o)
 CXX_OBJS = $(CXX_SOURCES:.cc=.o)
-OBJS = $(C_OBJS) $(CXX_OBJS)
+OBJCXX_OBJS = $(OBJCXX_SOURCES:.mm=.o)
+OBJS = $(C_OBJS) $(CXX_OBJS) $(OBJCXX_OBJS)
 
 # Target executable
 TARGET = $(BIN_DIR)/FrontyBrowser
@@ -41,6 +45,10 @@ $(BIN_DIR):
 # Compile C++ sources
 %.o: %.cc
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
+
+# Compile Objective-C++ sources
+%.o: %.mm
+	$(OBJCXX) $(OBJCXXFLAGS) -c -o $@ $<
 
 # Rule to clean object files after linking
 clean_objs:

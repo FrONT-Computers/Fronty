@@ -18,39 +18,31 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef FTY_RENDERER_TYPES_H
-#define FTY_RENDERER_TYPES_H
-
-#define FRONTY_BUF_SIZE 256
-
-#include "core/decls.h"
+#include "core/renderer/context/gl/fvao.h"
+#include <GL/glew.h>
 
 __FRONTY_NS_START(Fronty)
-__FRONTY_NS_START(Types)
+__FRONTY_NS_START(Renderer)
 
-enum class ContextType
+uint32_t FrontyVertexArrayObject::s_VaoId;
+
+uint32_t FrontyVertexArrayObject::genVertexArray() noexcept
 {
-    CONTEXT_OPENGL,
-    CONTEXT_DIRECTX,
-    CONTEXT_METAL,
-    CONTEXT_OPENGLES
-};
+    glGenVertexArrays(1, &s_VaoId);
+    glBindVertexArray(s_VaoId);
+    glEnableVertexAttribArray(0);
+    return s_VaoId;
+}
 
-enum class WindowStateFlags
+uint32_t FrontyVertexArrayObject::getVertexArrayId() noexcept
 {
-    FLAG_WINDOW_DEFAULT_PAGE = 0x1,
-    FLAG_WINDOW_RESTORE_PAGE = 0x2,
+    return s_VaoId;
+}
 
-    FLAG_WINDOW_FULLSCREEN = 0x4,
-    FLAG_WINDOW_MODAL_VIEW = 0x8,
-
-    FLAG_WINDOW_ANTI_ALIAS = 0x10,
-    FLAG_WINDOW_VSYNC      = 0x20,
-
-    // FLAG_WINDOW_FULLSCREEN = 0x40
-};
+void FrontyVertexArrayObject::unbindVertexArray() noexcept
+{
+    glBindVertexArray(0);
+}
 
 __FRONTY_NS_END()
 __FRONTY_NS_END()
-
-#endif /* FTY_RENDERER_TYPES_H */
